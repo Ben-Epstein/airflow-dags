@@ -28,6 +28,7 @@ from airflow.utils.dates import days_ago
 from airflow.models import DAG
 from airflow.operators.python_operator import PythonOperator
 from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
+import logging 
 
 args = {
     'owner': 'Ben',
@@ -59,6 +60,8 @@ run_this = PythonOperator(
 def send_email(ds, **kwargs):
     from os import environ as env_vars
     import smtplib, ssl
+    LOGGER = logging.getLogger('airflow.task')
+    LOGGER.info("sending email")
     smtp_server = "smtp.gmail.com"
     port = 465
     sender_email = "bensairflowwork@gmail.com"
@@ -66,9 +69,12 @@ def send_email(ds, **kwargs):
     password = env_vars['pwd']
     message = 'Hey buddy. I sent this from Airflow just for you'
     context = ssl.create_default_context()
-    with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message)
+    try:
+        with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
+            server.login(sender_email, password)
+            server.sendmail(sender_email, receiver_email, message)
+    except:
+        LOGGER.error('failed to send email')
 
 send_email = PythonOperator(
     task_id='send_the_email',
