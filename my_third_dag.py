@@ -60,12 +60,12 @@ run_this = PythonOperator(
 def send_email(ds, **kwargs):
     from os import environ as env_vars
     import smtplib, ssl
-    LOGGER = logging.getLogger('airflow.task')
+    LOGGER = logging.getLogger('file.task')
     LOGGER.info("sending email")
     smtp_server = "smtp.gmail.com"
     port = 465
     sender_email = "bensairflowwork@gmail.com"
-    receiver_email = env_vars['receiver']
+    receiver_email = kwargs['dag_run'].conf['receiver']#  env_vars['receiver']
     password = env_vars['pwd']
     message = 'Hey buddy. I sent this from Airflow just for you'
     context = ssl.create_default_context()
