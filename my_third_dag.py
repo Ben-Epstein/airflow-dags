@@ -59,6 +59,7 @@ run_this = PythonOperator(
 def send_email(ds, **kwargs):
     from os import environ as env_vars
     import smtplib, ssl
+    smtp_server = "smtp.gmail.com"
     port = 465
     sender_email = "bensairflow@gmail.com"
     receiver_email = env_vars['receiver']
