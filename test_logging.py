@@ -38,7 +38,7 @@ args = {
 }
 
 dag = DAG(
-    dag_id='email_test',
+    dag_id='logging_test',
     default_args=args,
     schedule_interval=None,
     tags=['example', 'k8s']
