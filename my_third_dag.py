@@ -67,7 +67,7 @@ def send_email(ds, **kwargs):
     sender_email = "bensairflowwork@gmail.com"
     receiver_email = kwargs['dag_run'].conf['receiver']#  env_vars['receiver']
     password = env_vars['pwd']
-    message = 'Hey buddy. I sent this from Airflow just for you'
+    message = kwargs['dag_run'].conf['message'] #'Hey buddy. I sent this from Airflow just for you'
     context = ssl.create_default_context()
     try:
         with smtplib.SMTP_SSL(smtp_server, port, context=context) as server:
