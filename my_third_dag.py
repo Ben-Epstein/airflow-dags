@@ -61,7 +61,7 @@ def send_email(ds, **kwargs):
     import smtplib, ssl
     smtp_server = "smtp.gmail.com"
     port = 465
-    sender_email = "bensairflow@gmail.com"
+    sender_email = "bensairflowwork@gmail.com"
     receiver_email = env_vars['receiver']
     password = env_vars['pwd']
     message = 'Hey buddy. I sent this from Airflow just for you'
