@@ -52,7 +52,7 @@ def print_context(ds, **kwargs):
     s = kwargs['dag_run'].conf['sleep_time']
     print(f'sleeping for {s} seconds')
     LOGGER.warn('sleeping for {s} seconds'.format(s))
-    sleep(s)
+    sleep(int(s))
     print(ds)
     LOGGER.warn('testing a warning')
     #sleep(25)
