@@ -49,10 +49,12 @@ dag = DAG(
 def print_context(ds, **kwargs):
     LOGGER.info('this is a log here')
     print('maybe through a print statement')
-    s = kwargs['dag_run'].conf['sleep_time']
-    print(f'sleeping for {s} seconds')
-    LOGGER.warn('sleeping for {s} seconds'.format(s))
-    sleep(int(s))
+    LOGGER.warn('lets try sleeping')
+    print('sleeping now')
+    #s = kwargs['dag_run'].conf['sleep_time']
+    #print(f'sleeping for {s} seconds')
+    #LOGGER.warn('sleeping for {s} seconds'.format(s))
+    sleep(150)
     print(ds)
     LOGGER.warn('testing a warning')
     #sleep(25)
