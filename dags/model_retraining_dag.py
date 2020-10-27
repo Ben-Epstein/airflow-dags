@@ -56,48 +56,48 @@ run_this = PythonOperator(
     dag=dag,
 )
 hyper1 =  PythonOperator(
-    task_id='Hyper Param Comb 1',
+    task_id='Hyper_Param_Comb_1',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
 )
 
 hyper2 =  PythonOperator(
-    task_id='Hyper Param Comb 2',
+    task_id='Hyper_Param_Comb_2',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
 )
 
 hyper3 =  PythonOperator(
-    task_id='Hyper Param Comb 3',
+    task_id='Hyper_Param_Comb_3',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
 )
 
 hyper4 =  PythonOperator(
-    task_id='Hyper Param Comb 4',
+    task_id='Hyper_Param_Comb_4',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
 )
 check_winner = PythonOperator(
-    task_id='Check Winner',
+    task_id='Check_Winner',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
 )
 
 compare_to_production = PythonOperator(
-    task_id='Compare to Prod',
+    task_id='Compare_to_Prod',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
 )
 
 deploy_if_better = PythonOperator(
-    task_id='Deploy if Better',
+    task_id='Deploy_if_Better',
     provide_context=True,
     python_callable=print_context,
     dag=dag,
