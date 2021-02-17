@@ -26,10 +26,10 @@ dag = DAG(
 )
 
 sqlOperator = PythonVirtualenvOperator(
-  task_id='run the sql'
+  task_id='run the sql',
   provide_context=True,
   python_callable=executeSQL,
   dag=dag,
-  requirements=['pyodbc','splicemachinesa']
+  requirements=['pyodbc','splicemachinesa'],
   python_version='3.8'
 )
