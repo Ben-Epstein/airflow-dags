@@ -1,12 +1,13 @@
 from airflow.models import Variable
 #from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.operators.python_operator import PythonVirtualenvOperator
-from splicemachinesa.pyodbc import splice_connect
+
 from airflow.utils.dates import days_ago
 from pprint import pprint
 from airflow.models import DAG
 
 def executeSQL(ds, **kwargs):
+    from splicemachinesa.pyodbc import splice_connect
     pprint(ds)
     pprint(kwargs)
     cnx = splice_connect(UID=Variable.get('UID'),PWD=Variable.get('db_password'),HOST=Variable.get('host'),SSL="basic")
