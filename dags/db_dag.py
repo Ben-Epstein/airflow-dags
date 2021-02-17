@@ -1,11 +1,12 @@
 from airflow.models import Variable
 #from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
 from airflow.operators.python_operator import PythonVirtualenvOperator
-
+import requests
 from airflow.utils.dates import days_ago
 from pprint import pprint
 from airflow.models import DAG
 
+"""
 def executeSQL(ds, **kwargs):
     from splicemachinesa.pyodbc import splice_connect
     pprint(ds)
@@ -17,7 +18,17 @@ def executeSQL(ds, **kwargs):
     cursor.execute('create table splice.foo(col1 int, col2 varchar(5000)')
     cursor.execute('insert into splice.foo values(55, \'test\'')
     cursor.commit()
+"""
 
+def executeSQL(ds, **kwargs):
+  url = Variable.get('url')
+  headers = {"username":Variable.get('UID'), "password":Variable.get('db_password')}
+  data = {"sqlstmt":'drop table if exists splice.foo','autocommit':True}
+  requests.post(url=url, headers=headers, data=data)
+  data['sqlstmt'] = 'create table splice.foo(col1 int, col2 varchar(5000)'
+  requests.post(url=url, headers=headers, data=data)
+  data['sqlstmt'] = "insert into splice.foo values(55,'test')"
+  requests.post(url=url, headers=headers, data=data)   
 
 dag = DAG(
     dag_id='test_SQL',
@@ -31,7 +42,7 @@ sqlOperator = PythonVirtualenvOperator(
   provide_context=True,
   python_callable=executeSQL,
   dag=dag,
-  requirements=['pyodbc','splicemachinesa'],
-  python_version='3.8',
+  #requirements=['pyodbc','splicemachinesa'],
+  #python_version='3.8',
   start_date=days_ago(2)
 )
