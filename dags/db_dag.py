@@ -27,7 +27,7 @@ dag = DAG(
 )
 
 sqlOperator = PythonVirtualenvOperator(
-  task_id='run the sql',
+  task_id='run_the_sql',
   provide_context=True,
   python_callable=executeSQL,
   dag=dag,
