@@ -25,7 +25,7 @@ def executeSQL(ds, **kwargs):
   headers = {"username":Variable.get('UID'), "password":Variable.get('db_password')}
   data = {"sqlstmt":'drop table if exists splice.foo','autocommit':True}
   requests.post(url=url, headers=headers, data=data)
-  data['sqlstmt'] = 'create table splice.foo(col1 int, col2 varchar(5000)'
+  data['sqlstmt'] = 'create table splice.foo(col1 int, col2 varchar(5000))'
   requests.post(url=url, headers=headers, data=data)
   data['sqlstmt'] = "insert into splice.foo values(55,'test')"
   requests.post(url=url, headers=headers, data=data)   
