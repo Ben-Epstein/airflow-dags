@@ -19,7 +19,7 @@ def executeSQL(ds, **kwargs):
 
 
 dag = DAG(
-    dag_id='test_SQL'
+    dag_id='test_SQL',
     default_args=None,
     schedule_interval=None,
     tags=['example SQL']
