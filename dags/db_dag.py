@@ -32,5 +32,6 @@ sqlOperator = PythonVirtualenvOperator(
   python_callable=executeSQL,
   dag=dag,
   requirements=['pyodbc','splicemachinesa'],
-  python_version='3.8'
+  python_version='3.8',
+  start_date=days_ago(2)
 )
