@@ -1,6 +1,6 @@
 from airflow.models import Variable
 #from airflow.contrib.operators.kubernetes_pod_operator import KubernetesPodOperator
-from airflow.operators.python_operator import PythonVirtualenvOperator
+from airflow.operators.python_operator import PythonOperator
 import requests
 from airflow.utils.dates import days_ago
 from pprint import pprint
@@ -37,7 +37,7 @@ dag = DAG(
     tags=['example SQL']
 )
 
-sqlOperator = PythonVirtualenvOperator(
+sqlOperator = PythonOperator(
   task_id='run_the_sql',
   provide_context=True,
   python_callable=executeSQL,
